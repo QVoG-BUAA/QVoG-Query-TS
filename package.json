@@ -1,0 +1,22 @@
+{
+  "name": "qvog-query",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "qvog",
+    "vulnerability",
+    "graph"
+  ],
+  "author": "Tony S.",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
