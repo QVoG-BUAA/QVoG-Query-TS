@@ -1,7 +1,13 @@
-import { greet } from 'qvog-engine'
+import { Configuration, QVoGEngine, PythonSpecification, FilePrintStream, DefaultResultFormatter } from 'qvog-engine';
+import { demo } from './demo';
 
-// get all arguments passed to the script
-const args = process.argv
-console.log(args);
+Configuration.setSpecification(PythonSpecification);
 
-console.log(greet('TypeScript'))
+let engine = QVoGEngine.getInstance()
+    .withOutput(new FilePrintStream("result.md", false))
+    .withFormatter(new DefaultResultFormatter())
+    .withStyle("markdown");
+
+engine.execute(demo[0], demo[1])
+
+engine.close();

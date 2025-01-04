@@ -1,11 +1,11 @@
 {
   "name": "qvog-query",
   "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "npx tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup",
+    "start": "node dist/index.js",
+    "dev": "npm run build && npm run start"
   },
   "keywords": [
     "qvog",
@@ -16,7 +16,13 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "ts-node": "^10.9.2",
+    "buffer": "^6.0.3",
+    "deasync": "^0.1.30",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/deasync": "^0.1.5",
+    "tsup": "^8.3.5",
     "typescript": "^5.7.2"
   }
 }
