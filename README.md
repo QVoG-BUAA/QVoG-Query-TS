@@ -39,6 +39,10 @@ The entry point of the project is `src/index.ts`. Currently, you have to manuall
 npm run dev
 ```
 
+### Demo
+
+The project now comes with some demo queries in `src/demo.ts`. And the current configuration will output the result in Markdown syntax to `result.md`.
+
 ## Future Work
 
 In order to run queries more flexibly, the `index.ts` file should be automatically generated depending on the configurations and queries to run, thus some external scripts are needed.

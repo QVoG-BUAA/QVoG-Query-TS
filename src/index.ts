@@ -1,5 +1,6 @@
-import { Configuration, QVoGEngine, PythonSpecification, FilePrintStream, DefaultResultFormatter } from 'qvog-engine';
-import { demo } from './demo';
+import { Configuration, DefaultResultFormatter, FilePrintStream, PythonSpecification, QVoGEngine } from 'qvog-engine';
+
+import { AllCodeNodes, AllNodes } from './demo';
 
 Configuration.setSpecification(PythonSpecification);
 
@@ -8,6 +9,6 @@ let engine = QVoGEngine.getInstance()
     .withFormatter(new DefaultResultFormatter())
     .withStyle("markdown");
 
-engine.execute(demo[0], demo[1])
+engine.submit([AllNodes, AllCodeNodes]);
 
 engine.close();
