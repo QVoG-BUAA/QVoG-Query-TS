@@ -1,4 +1,5 @@
-import { Configuration, DefaultResultFormatter, FilePrintStream, PythonSpecification, QVoGEngine } from 'qvog-engine';
+import { PythonSpecification } from 'qvog-lib';
+import { Configuration, DefaultResultFormatter, FilePrintStream, QVoGEngine } from 'qvog-engine';
 
 import { AllCodeNodes, AllNodes } from './demo';
 
