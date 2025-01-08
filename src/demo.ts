@@ -9,7 +9,7 @@ export const AllNodes: Queryable = [
 
 export const AllCodeNodes: Queryable = [
     "Get All Code Nodes", q => q
-        .from(f => f.withData(ValuePredicate.any()).as("CodeNodes"))
+        .from(f => f.withData(ValuePredicate.of(v => v.stream().any(ValuePredicate.any().test))).as("CodeNodes"))
         .where(f => f.on("CodeNodes").where(ValuePredicate.of(v => v.getNode() instanceof CodeNode)))
         .select(["CodeNodes", "This is a code node"])
 ];
