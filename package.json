@@ -5,7 +5,11 @@
   "scripts": {
     "build": "tsup",
     "start": "node dist/index.js",
-    "dev": "npm run build && npm run start"
+    "start:py": "node dist/index.py.js",
+    "start:ark": "node dist/index.ark.js",
+    "dev": "npm run build && npm run start",
+    "dev:py": "npm run build && npm run start:py",
+    "dev:ark": "npm run build && npm run start:ark"
   },
   "keywords": [
     "qvog",
