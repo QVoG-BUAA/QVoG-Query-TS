@@ -21,8 +21,7 @@
   "description": "",
   "dependencies": {
     "buffer": "^6.0.3",
-    "deasync": "^0.1.30",
-    "ts-node": "^10.9.2"
+    "deasync": "^0.1.30"
   },
   "devDependencies": {
     "@types/deasync": "^0.1.5",
