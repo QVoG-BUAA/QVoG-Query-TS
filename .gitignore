@@ -1,7 +1,7 @@
 .vscode/
 node_modules/
 dist/
-
+package-lock.json
 config.json
 result.md
 result.*.md

@@ -1,5 +1,6 @@
 # QVoG Query
 
+> [!WARNING]
 > THIS PROJECT IS A WORK IN PROGRESS
 
 ## Build
@@ -10,7 +11,7 @@ To initialize the project, run the following command:
 npm install
 ```
 
-It depends on [QVoG-Engine](https://github.com/QVoG-BUAA/QVoG-Engine-TS) and [QVoG-Lib](https://github.com/QVoG-BUAA/QVoG-Lib-TS), since they are not yet uploaded to npm, you need to link them to the project. To do this, first run `npm link` in those two repos, and then run the following commands in this project:
+It depends on [QVoG-Engine](https://github.com/QVoG-BUAA/QVoG-Engine-TS) and [QVoG-Lib](https://github.com/QVoG-BUAA/QVoG-Lib-TS), since they are not yet uploaded to npm, you need to link them to the project. To do this, first run `npm link` in those two repos, and then run the following commands in this repo:
 
 ```bash
 npm link qvog-engine qvog-lib

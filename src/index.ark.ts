@@ -1,15 +1,15 @@
-import { PythonSpecification } from 'qvog-lib';
+import { ArkTsSpecification } from 'qvog-lib';
 import { Configuration, DefaultResultFormatter, FilePrintStream, QVoGEngine } from 'qvog-engine';
+import { AllValidNodes, FindBinaryOperator, FindStringAssignment } from './queries/demo.ark';
+import { AllNodes } from './queries/demo';
 
-import { AllNodes, AllCodeNodes, ErrorQuery, ExistsDataFlow } from '~/queries/demo';
-
-Configuration.setSpecification(PythonSpecification);
+Configuration.setSpecification(ArkTsSpecification);
 
 let engine = QVoGEngine.getInstance()
     .withOutput(new FilePrintStream("result.ark.md", false))
     .withFormatter(new DefaultResultFormatter())
     .withStyle("markdown");
 
-engine.submit([AllNodes, AllCodeNodes, ErrorQuery, ExistsDataFlow]);
+engine.submit([AllNodes, AllValidNodes, FindBinaryOperator, FindStringAssignment]);
 
 engine.close();
