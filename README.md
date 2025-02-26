@@ -11,7 +11,7 @@ To initialize the project, run the following command:
 npm install
 ```
 
-It depends on [QVoG-Engine](https://github.com/QVoG-BUAA/QVoG-Engine-TS) and [QVoG-Lib](https://github.com/QVoG-BUAA/QVoG-Lib-TS), since they are not yet uploaded to npm, you need to link them to the project. To do this, first run `npm link` in those two repos, and then run the following commands in this repo:
+If you have [`qvog-engine`](https://github.com/QVoG-BUAA/QVoG-Engine-TS) and [`qvog-lib`](https://github.com/QVoG-BUAA/QVoG-Lib-TS) locally, link them after installing the dependencies.
 
 ```bash
 npm link qvog-engine qvog-lib

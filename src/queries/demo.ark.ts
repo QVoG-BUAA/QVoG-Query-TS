@@ -1,4 +1,4 @@
-import { Queryable, Value } from "qvog-engine";
+import { Queryable } from "qvog-engine";
 import { Assignment, BinaryOperator } from "qvog-lib";
 
 export const AllValidNodes: Queryable = [

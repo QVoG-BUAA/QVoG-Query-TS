@@ -21,11 +21,20 @@
   "description": "",
   "dependencies": {
     "buffer": "^6.0.3",
-    "deasync": "^0.1.30"
+    "deasync": "^0.1.30",
+    "qvog-engine": "^0.1.1",
+    "qvog-lib": "^0.1.1"
   },
   "devDependencies": {
     "@types/deasync": "^0.1.5",
     "tsup": "^8.3.5",
     "typescript": "^5.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QVoG-BUAA/QVoG-Query-TS"
+  },
+  "bugs": {
+    "url": "https://github.com/QVoG-BUAA/QVoG-Query-TS/issues"
   }
 }
