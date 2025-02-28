@@ -19,7 +19,9 @@ npm link qvog-engine qvog-lib
 
 If you have other custom query libraries, you can also link them in the same way.
 
-> Note that the modules added by `npm link` will be removed when you run `npm install` again. And you have to specify all linked modules in one command.
+> [!NOTE] Note that the modules added by `npm link` will be removed when you run `npm install` again. And you have to specify all linked modules in one command.
+
+> [!ERROR] For `qvog-engine` or `qvog-lib`, you must ensure they are both local or from NPM, or package duplication will occur, causing runtime type identification to fail.
 
 To build the project, run the following command:
 
