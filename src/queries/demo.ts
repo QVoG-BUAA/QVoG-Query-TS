@@ -52,9 +52,9 @@ result = a  // sink
  */
 export const ExistsTaintFlow: Queryable = [
     "Find Taint Flow", q => q
-        .from(f => f.withData(asCodeNode(node => node.getProperty().code === "a = bad")).as("Source"))
-        .from(f => f.withData(asCodeNode(node => node.getProperty().code === "f(a)")).as("Barrier"))
-        .from(f => f.withData(asCodeNode(node => node.getProperty().code === "result = a")).as("Sink"))
+        .from(f => f.withData(v => v.getCode() === "a = bad").as("Source"))
+        .from(f => f.withData(v => v.getCode() === "f(a)").as("Barrier"))
+        .from(f => f.withData(v => v.getCode() === "result = a").as("Sink"))
         .where(f => f.source("Source").barrier("Barrier").sink("Sink").as("TaintFlow"), () => new TaintFlow())
         .select(["Source", "Sink", "TaintFlow"])
 ];
