@@ -1,5 +1,5 @@
-import { Queryable } from "qvog-engine";
-import { AssignStmt, BinaryOperator, InstanceOfExpr, InvokeExpr, ReturnStmt, Variable } from "qvog-lib";
+import { Queryable, ValuePredicate } from "qvog-engine";
+import { AssignStmt, BinaryOperator, Constant, IfStmt, InstanceOfExpr, InvokeExpr, ReturnStmt, T, Variable } from "qvog-lib";
 
 export const AllValidNodes: Queryable = [
     "Get All Valid Nodes", q => q
@@ -18,9 +18,15 @@ export const FindBinaryOperator: Queryable = [
 export const FindStringAssignment: Queryable = [
     "Find String Assignment", q => q
         .from(f => f
-            .withData(v => v.stream().any(s =>
-                (s instanceof AssignStmt) && (s.getValue().getType().getName() === "string")
-            ))
+            .withData(v => v.stream().any(s => {
+                if (s instanceof AssignStmt) {
+                    const value = s.getValue();
+                    if ((value instanceof Constant) && (value.getType().getName() === "string")) {
+                        return value.getValue() === "hello there";
+                    }
+                }
+                return false;
+            }))
             .as("String Assignment"))
         .select(["String Assignment", "This is a string assignment"])
 ];
@@ -67,4 +73,12 @@ export const FindReturn: Queryable = [
             .withData(v => v.stream().any(s => s instanceof ReturnStmt))
             .as("Return"))
         .select(["Return", "Return statement found"])
+];
+
+export const FindIf: Queryable = [
+    "Find If", q => q
+        .from(f => f
+            .withData(v => v.stream().any(s => s instanceof IfStmt))
+            .as("If"))
+        .select(["If", "If statement found"])
 ];
