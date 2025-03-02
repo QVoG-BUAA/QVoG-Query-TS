@@ -1,5 +1,5 @@
-import { Queryable, ValuePredicate } from "qvog-engine";
-import { AssignStmt, BinaryOperator, Constant, IfStmt, InstanceOfExpr, InvokeExpr, ReturnStmt, T, Variable } from "qvog-lib";
+import { Queryable } from "qvog-engine";
+import { AssignStmt, BinaryOperator, Constant, IfStmt, InstanceOfExpr, InvokeExpr, ReturnStmt, Variable } from "qvog-lib";
 
 export const AllValidNodes: Queryable = [
     "Get All Valid Nodes", q => q
