@@ -1,5 +1,5 @@
-import { Queryable } from "qvog-engine";
-import { AssignStmt, BinaryOperator, Constant, IfStmt, InstanceOfExpr, InvokeExpr, ReturnStmt, Variable } from "qvog-lib";
+import { Queryable, Type, Value } from "qvog-engine";
+import { ArrayType, AssignStmt, BinaryOperator, Constant, IfStmt, InstanceOfExpr, InvokeExpr, P, ReturnStmt, UnionType, Variable } from "qvog-lib";
 
 export const AllValidNodes: Queryable = [
     "Get All Valid Nodes", q => q
@@ -56,6 +56,31 @@ export const FindInvoke: Queryable = [
         .select(["Invoke", "Invoke found"])
 ];
 
+// An alternative way to write the above query.
+// Just for fun to check what the Fluent API can do. :)
+// Neglect this if you are not interested.
+export const FindInvokeAlt: Queryable = [
+    "Find Invoke Alt", q => q
+        .from(f => f
+            .withData(v => v.stream().any(s =>
+                P<Value>(s => s instanceof InvokeExpr).and(
+                    P<InvokeExpr>(
+                        t => ((t.getTarget() === "foo") && (t.getArg(0).getType().getName() === "number"))
+                    ).or<InvokeExpr>(
+                        P<InvokeExpr>(
+                            t => (t.getTarget() === "d") && (t.getBase() instanceof Variable)
+                        ).and<Variable>(
+                            t => t.getName() === "baz",
+                            t => t.getBase()! as Variable
+                        )
+                    ).or<InvokeExpr>(
+                        t => t.getCode().match(/baz\.e\.f/) !== null
+                    )
+                ).test(s)))
+            .as("Invoke"))
+        .select(["Invoke", "Invoke found"])
+];
+
 export const FindInstanceOf: Queryable = [
     "Find Instance Of", q => q
         .from(f => f
@@ -82,3 +107,20 @@ export const FindIf: Queryable = [
             .as("If"))
         .select(["If", "If statement found"])
 ];
+
+export const FindUnion: Queryable = [
+    "Find Union", q => q
+        .from(f => f
+            .withData(v => v.stream().any(s => P<Value>(s => s instanceof Variable)
+                .and<Type>(
+                    t => t instanceof ArrayType,
+                    s => s.getType()
+                )
+                .and<ArrayType>(
+                    t => t.getElementType() instanceof UnionType
+                )
+                .test(s)
+            ))
+            .as("Union"))
+        .select(["Union", "Union type found"])
+]

@@ -1,4 +1,4 @@
-import { asCodeNode, DataFlow, DfgTraverse, HamiltonFlow, TaintFlow } from "qvog-lib";
+import { DataFlow, DfgTraverse, HamiltonFlow, TaintFlow } from "qvog-lib";
 import { CodeNode, FlowPredicate, Queryable, ValuePredicate } from "qvog-engine";
 
 export const AllNodes: Queryable = [

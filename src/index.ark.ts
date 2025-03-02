@@ -5,10 +5,12 @@ import {
     AllValidNodes,
     FindBinaryOperator,
     FindInvoke,
+    FindInvokeAlt,
     FindInstanceOf,
     FindReturn,
     FindStringAssignment,
-    FindIf
+    FindIf,
+    FindUnion
 } from './queries/demo.ark';
 
 Configuration.setSpecification(ArkTsSpecification);
@@ -23,9 +25,11 @@ engine.submit([
     FindBinaryOperator,
     FindStringAssignment,
     FindInvoke,
+    FindInvokeAlt,
     FindInstanceOf,
     FindReturn,
-    FindIf
+    FindIf,
+    FindUnion
 ]);
 
 engine.close();
