@@ -10,7 +10,8 @@ import {
     FindReturn,
     FindStringAssignment,
     FindIf,
-    FindUnion
+    FindUnion,
+    FindReference
 } from './queries/demo.ark';
 
 Configuration.setSpecification(ArkTsSpecification);
@@ -29,7 +30,8 @@ engine.submit([
     FindInstanceOf,
     FindReturn,
     FindIf,
-    FindUnion
+    FindUnion,
+    FindReference
 ]);
 
 engine.close();

@@ -1,5 +1,5 @@
 import { Queryable, Type, Value } from "qvog-engine";
-import { ArrayType, AssignStmt, BinaryOperator, Constant, IfStmt, InstanceOfExpr, InvokeExpr, P, ReturnStmt, UnionType, Variable } from "qvog-lib";
+import { ArrayType, AssignStmt, BinaryOperator, Constant, IfStmt, InstanceOfExpr, InvokeExpr, P, Reference, ReturnStmt, UnionType, Variable } from "qvog-lib";
 
 export const AllValidNodes: Queryable = [
     "Get All Valid Nodes", q => q
@@ -123,4 +123,12 @@ export const FindUnion: Queryable = [
             ))
             .as("Union"))
         .select(["Union", "Union type found"])
-]
+];
+
+export const FindReference: Queryable = [
+    "Find Reference", q => q
+        .from(f => f
+            .withData(v => v.stream().any(s => s instanceof Reference))
+            .as("Reference"))
+        .select(["Reference", "Reference found"])
+];
