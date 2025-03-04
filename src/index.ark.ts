@@ -5,14 +5,25 @@ import {
     AllValidNodes,
     FindBinaryOperator,
     FindInvoke,
-    FindInvokeAlt,
     FindInstanceOf,
     FindReturn,
     FindStringAssignment,
-    FindIf,
-    FindUnion,
-    FindReference
+    FindIf
 } from './queries/demo.ark';
+import {
+    FindLocalStoragePassword,
+    FindLocalStoragePasswordThroughDataFlow,
+    FindMathRandom,
+    FindLogSensitiveInfo,
+    FindUnsafeRedirect,
+    FindXSS,
+    FindInfiniteLoop,
+    FindInsecureHttpRequest,
+    FindInsecureHttpRequestThroughDataflow,
+    FindCSRFVulnerability,
+    FindExcessiveSQLPrivileges,
+
+} from './queries/homeCheck.ark'
 
 Configuration.setSpecification(ArkTsSpecification);
 
@@ -26,12 +37,24 @@ engine.submit([
     FindBinaryOperator,
     FindStringAssignment,
     FindInvoke,
-    FindInvokeAlt,
     FindInstanceOf,
     FindReturn,
-    FindIf,
-    FindUnion,
-    FindReference
+    FindIf
+]);
+
+engine.submit([
+    FindLocalStoragePassword,
+    FindLocalStoragePasswordThroughDataFlow,
+    FindMathRandom,
+    FindLogSensitiveInfo,
+    FindUnsafeRedirect,
+    FindXSS,
+    FindInfiniteLoop,
+    FindInsecureHttpRequest,
+    FindInsecureHttpRequestThroughDataflow,
+    FindCSRFVulnerability,
+    FindExcessiveSQLPrivileges,
+    
 ]);
 
 engine.close();
