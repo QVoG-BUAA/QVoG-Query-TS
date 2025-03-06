@@ -1,7 +1,7 @@
 # QVoG Query
 
-> [!WARNING]
-> THIS PROJECT IS A WORK IN PROGRESS
+> [!NOTE]
+> This is a demo collection of queries for QVoG Engine.
 
 ## Build
 
@@ -42,18 +42,19 @@ Before you run the project, you need to create a `config.json` file in the root 
 }
 ```
 
-The entry point of the project is `src/index.ts`, it should be generated from DSL. However, this translation is not yet complete, so you have to manually write query with the underlying API. Currently, there are two languages supported, Python and ArkTS, their entry points are `src/index.py.ts` and `src/index.ark.ts`. To build and run the queries, use the following command.
+The entry point of the project is `src/index.ts`, which should be generated from DSL. However, this translation is not yet complete, so you have to manually write query with the underlying API. Currently, only ArkTS is partially supported, and its entry points is `src/index.ark.ts`. To build and run the queries, use the following command.
 
 ```bash
-npm run dev:py    # run Python queries
-npm run dev:ark   # run ArkTS queries
+./run.ps1 index.ark      # run demo
+./run.ps1 index.vul.ark  # run vulnerability demo
 ```
 
-Once DSL is ready, you can use `npm run dev` to run queries.
+> [!NOTE]
+> Once DSL translation is ready, you can use `npm run dev` to run queries.
 
 ### Demo
 
-The project now comes with some demo queries in `src/demo.ts`. And the current configuration will output the result in Markdown syntax to `result.<language>.md`.
+The project now comes with some demo queries in `src/queries`. And the current configuration will output the result in Markdown syntax to `result.<language>[.<tag>].md`.
 
 ## Future Work
 

@@ -1,6 +1,7 @@
 {
   "name": "qvog-query",
-  "version": "1.0.0",
+  "description": "QVoG example queries",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsup",
@@ -18,7 +19,6 @@
   ],
   "author": "Tony S.",
   "license": "MIT",
-  "description": "",
   "dependencies": {
     "buffer": "^6.0.3",
     "deasync": "^0.1.30",

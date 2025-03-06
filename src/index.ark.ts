@@ -10,20 +10,6 @@ import {
     FindStringAssignment,
     FindIf
 } from './queries/demo.ark';
-import {
-    FindLocalStoragePassword,
-    FindLocalStoragePasswordThroughDataFlow,
-    FindMathRandom,
-    FindLogSensitiveInfo,
-    FindUnsafeRedirect,
-    FindXSS,
-    FindInfiniteLoop,
-    FindInsecureHttpRequest,
-    FindInsecureHttpRequestThroughDataflow,
-    FindCSRFVulnerability,
-    FindExcessiveSQLPrivileges,
-
-} from './queries/homeCheck.ark'
 
 Configuration.setSpecification(ArkTsSpecification);
 
@@ -40,21 +26,6 @@ engine.submit([
     FindInstanceOf,
     FindReturn,
     FindIf
-]);
-
-engine.submit([
-    FindLocalStoragePassword,
-    FindLocalStoragePasswordThroughDataFlow,
-    FindMathRandom,
-    FindLogSensitiveInfo,
-    FindUnsafeRedirect,
-    FindXSS,
-    FindInfiniteLoop,
-    FindInsecureHttpRequest,
-    FindInsecureHttpRequestThroughDataflow,
-    FindCSRFVulnerability,
-    FindExcessiveSQLPrivileges,
-    
 ]);
 
 engine.close();
