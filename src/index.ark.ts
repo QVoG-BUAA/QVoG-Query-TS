@@ -4,11 +4,14 @@ import { Configuration, DefaultResultFormatter, FilePrintStream, QVoGEngine } fr
 import {
     AllValidNodes,
     FindBinaryOperator,
-    FindInvoke,
+    FindIf,
     FindInstanceOf,
+    FindInvoke,
+    FindInvokeAlt,
+    FindReference,
     FindReturn,
     FindStringAssignment,
-    FindIf
+    FindUnion
 } from './queries/demo.ark';
 
 Configuration.setSpecification(ArkTsSpecification);
@@ -21,11 +24,14 @@ let engine = QVoGEngine.getInstance()
 engine.submit([
     AllValidNodes,
     FindBinaryOperator,
-    FindStringAssignment,
-    FindInvoke,
+    FindIf,
     FindInstanceOf,
+    FindInvoke,
+    FindInvokeAlt,
+    FindReference,
     FindReturn,
-    FindIf
+    FindStringAssignment,
+    FindUnion
 ]);
 
 engine.close();

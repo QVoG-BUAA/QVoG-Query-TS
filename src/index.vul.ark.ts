@@ -1,17 +1,18 @@
-import { Configuration, QVoGEngine, FilePrintStream, DefaultResultFormatter } from 'qvog-engine';
 import { ArkTsSpecification } from 'qvog-lib';
+import { Configuration, DefaultResultFormatter, FilePrintStream, QVoGEngine } from 'qvog-engine';
+
 import {
-    FindLocalStoragePassword,
-    FindLocalStoragePasswordThroughDataFlow,
-    FindMathRandom,
-    FindLogSensitiveInfo,
-    FindUnsafeRedirect,
-    FindXSS,
+    FindCSRFVulnerability,
+    FindExcessiveSQLPrivileges,
     FindInfiniteLoop,
     FindInsecureHttpRequest,
     FindInsecureHttpRequestThroughDataflow,
-    FindCSRFVulnerability,
-    FindExcessiveSQLPrivileges,
+    FindLocalStoragePassword,
+    FindLocalStoragePasswordThroughDataFlow,
+    FindLogSensitiveInfo,
+    FindMathRandom,
+    FindUnsafeRedirect,
+    FindXSS
 } from './queries/vulnerability.ark'
 
 Configuration.setSpecification(ArkTsSpecification);
@@ -22,17 +23,17 @@ let engine = QVoGEngine.getInstance()
     .withStyle("markdown");
 
 engine.submit([
-    FindLocalStoragePassword,
-    FindLocalStoragePasswordThroughDataFlow,
-    FindMathRandom,
-    FindLogSensitiveInfo,
-    FindUnsafeRedirect,
-    FindXSS,
+    FindCSRFVulnerability,
+    FindExcessiveSQLPrivileges,
     FindInfiniteLoop,
     FindInsecureHttpRequest,
     FindInsecureHttpRequestThroughDataflow,
-    FindCSRFVulnerability,
-    FindExcessiveSQLPrivileges,
+    FindLocalStoragePassword,
+    FindLocalStoragePasswordThroughDataFlow,
+    FindLogSensitiveInfo,
+    FindMathRandom,
+    FindUnsafeRedirect,
+    FindXSS
 ]);
 
 engine.close();
