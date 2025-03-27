@@ -17,9 +17,7 @@ import {
 Configuration.setSpecification(ArkTsSpecification);
 
 let engine = QVoGEngine.getInstance()
-    .withOutput(new FilePrintStream("result.ark.md", false))
-    .withFormatter(new DefaultResultFormatter())
-    .withStyle("markdown");
+    .withOutput(new FilePrintStream("result.ark.md", false));
 
 engine.submit([
     AllValidNodes,

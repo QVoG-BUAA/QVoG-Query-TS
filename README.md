@@ -35,10 +35,15 @@ Before you run the project, you need to create a `config.json` file in the root 
 
 ```json
 {
-    "gremlin": {
-        "host": "localhost",
-        "port": 8182
-    }
+    "database": {
+        "gremlin": {
+            "host": "localhost",
+            "port": 8182,
+            "batchSize": 1000
+        }
+    },
+    "formatter": "default",
+    "style": "markdown"
 }
 ```
 
