@@ -12,9 +12,8 @@ export const FindStringAssignment = query("Find String Assignment", () => {
     from(f => f
         .withData(v => v.stream().any(s => {
             if (s instanceof AssignStmt) {
-                const value = s.getValue();
-                if ((value instanceof Constant) && (value.getType().getName() === "string")) {
-                    return value.getValue() === "hello there";
+                if ((s.value instanceof Constant) && (s.value.type.name === "string")) {
+                    return s.value.value === "hello there";
                 }
             }
             return false;
@@ -31,16 +30,16 @@ export const FindInvoke: Queryable = [
                     // call to `foo` with a number argument
                     (
                         (s.getTarget() == "foo") &&
-                        (s.getArg(0).getType().getName() === "number")
+                        (s.getArg(0).type.name === "number")
                     ) ||
                     // baz.d
                     (
                         (s.getTarget() === "d") && s.getBase() &&
-                        (v => (v instanceof Variable) && (v.getName() === "baz"))(s.getBase())
+                        (v => (v instanceof Variable) && (v.name === "baz"))(s.getBase())
                     ) ||
                     // baz.e.f
                     (
-                        s.getCode().match(/baz\.e\.f/) !== null
+                        s.code.match(/baz\.e\.f/) !== null
                     )
                 )
             ))
@@ -57,16 +56,16 @@ export const FindInvokeAlt: Queryable = [
             .withData(v => v.stream().any(s =>
                 P<Value>(s => s instanceof InvokeExpr).and(
                     P<InvokeExpr>(
-                        t => ((t.getTarget() === "foo") && (t.getArg(0).getType().getName() === "number"))
+                        t => ((t.getTarget() === "foo") && (t.getArg(0).type.name === "number"))
                     ).or<InvokeExpr>(
                         P<InvokeExpr>(
                             t => (t.getTarget() === "d") && (t.getBase() instanceof Variable)
                         ).and<Variable>(
-                            t => t.getName() === "baz",
+                            t => t.name === "baz",
                             t => t.getBase()! as Variable
                         )
                     ).or<InvokeExpr>(
-                        t => t.getCode().match(/baz\.e\.f/) !== null
+                        t => t.code.match(/baz\.e\.f/) !== null
                     )
                 ).test(s)))
             .as("Invoke"))
@@ -78,7 +77,7 @@ export const FindInstanceOf: Queryable = [
         .from(f => f
             .withData(v => v.stream().any(s =>
                 (s instanceof InstanceOfExpr) &&
-                (s.getTestType().getName() === "TestObject")
+                (s.testType.name === "TestObject")
             ))
             .as("Instance Of"))
         .select("Instance Of", "TestObject instanceof")
@@ -106,10 +105,10 @@ export const FindUnion: Queryable = [
             .withData(v => v.stream().any(s => P<Value>(s => s instanceof Variable)
                 .and<Type>(
                     t => t instanceof ArrayType,
-                    s => s.getType()
+                    s => s.type
                 )
                 .and<ArrayType>(
-                    t => t.getElementType() instanceof UnionType
+                    t => t.elementType instanceof UnionType
                 )
                 .test(s)
             ))

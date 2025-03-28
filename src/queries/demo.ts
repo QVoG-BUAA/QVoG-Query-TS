@@ -10,7 +10,7 @@ export const AllNodes: Queryable = [
 export const AllCodeNodes: Queryable = [
     "Get All Code Nodes", q => q
         .from(f => f.withData(v => v.stream().any(ValuePredicate.any().test)).as("CodeNodes"))
-        .where(f => f.on("CodeNodes").where(ValuePredicate.of(v => v.getNode() instanceof CodeNode)))
+        .where(f => f.on("CodeNodes").where(ValuePredicate.of(v => v.node instanceof CodeNode)))
         .select("CodeNodes", "This is a code node")
 ];
 
@@ -52,9 +52,9 @@ result = a  // sink
  */
 export const ExistsTaintFlow: Queryable = [
     "Find Taint Flow", q => q
-        .from(f => f.withData(v => v.getCode() === "a = bad").as("Source"))
-        .from(f => f.withData(v => v.getCode() === "f(a)").as("Barrier"))
-        .from(f => f.withData(v => v.getCode() === "result = a").as("Sink"))
+        .from(f => f.withData(v => v.code === "a = bad").as("Source"))
+        .from(f => f.withData(v => v.code === "f(a)").as("Barrier"))
+        .from(f => f.withData(v => v.code === "result = a").as("Sink"))
         .where(f => f.source("Source").barrier("Barrier").sink("Sink").as("TaintFlow"), () => new TaintFlow())
         .select("Source", "Sink", "TaintFlow")
 ];
