@@ -10,7 +10,8 @@ import {
     FindReference,
     FindReturn,
     FindStringAssignment,
-    FindUnion
+    FindUnion,
+    FindDataFlow
 } from './queries/demo.ark';
 
 Configuration.setSpecification(ArkTsSpecification);
@@ -27,7 +28,8 @@ engine.submit([
     FindReference,
     FindReturn,
     FindStringAssignment,
-    FindUnion
+    FindUnion,
+    FindDataFlow
 ]);
 
 engine.close();
