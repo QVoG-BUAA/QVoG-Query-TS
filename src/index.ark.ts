@@ -1,8 +1,7 @@
 import { ArkTsSpecification } from 'qvog-lib';
-import { Configuration, DefaultResultFormatter, FilePrintStream, QVoGEngine } from 'qvog-engine';
+import { Configuration, FilePrintStream, QVoGEngine } from 'qvog-engine';
 
 import {
-    AllValidNodes,
     FindBinaryOperator,
     FindIf,
     FindInstanceOf,
@@ -20,7 +19,6 @@ let engine = QVoGEngine.getInstance()
     .withOutput(new FilePrintStream("result.ark.md", false));
 
 engine.submit([
-    AllValidNodes,
     FindBinaryOperator,
     FindIf,
     FindInstanceOf,

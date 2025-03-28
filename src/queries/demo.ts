@@ -4,21 +4,21 @@ import { CodeNode, FlowPredicate, Queryable, ValuePredicate } from "qvog-engine"
 export const AllNodes: Queryable = [
     "Get All Nodes", q => q
         .from(f => f.withData(ValuePredicate.any()).as("Nodes"))
-        .select(["Nodes", "This is a node"])
+        .select("Nodes", "This is a node")
 ];
 
 export const AllCodeNodes: Queryable = [
     "Get All Code Nodes", q => q
         .from(f => f.withData(v => v.stream().any(ValuePredicate.any().test)).as("CodeNodes"))
         .where(f => f.on("CodeNodes").where(ValuePredicate.of(v => v.getNode() instanceof CodeNode)))
-        .select(["CodeNodes", "This is a code node"])
+        .select("CodeNodes", "This is a code node")
 ];
 
 export const ErrorQuery: Queryable = [
     "Error Query", q => q
         .from(f => f.withData(ValuePredicate.any()).as("Nodes"))
         .where(f => f.on("Not Exists").where(ValuePredicate.any()))
-        .select(["Nodes", "This is a node"])
+        .select("Nodes", "This is a node")
 ];
 
 export const ExistsDataFlow: Queryable = [
@@ -30,7 +30,7 @@ export const ExistsDataFlow: Queryable = [
             strategy: new DfgTraverse()
         }).source("Source").sink("Sink").as("DataFlow"), () => new DataFlow())
         .where(f => f.on("DataFlow").where(FlowPredicate.of(p => p.getSize() > 1)))
-        .select(["Source", "Sink", "DataFlow"])
+        .select("Source", "Sink", "DataFlow")
 ];
 
 /**
@@ -56,5 +56,5 @@ export const ExistsTaintFlow: Queryable = [
         .from(f => f.withData(v => v.getCode() === "f(a)").as("Barrier"))
         .from(f => f.withData(v => v.getCode() === "result = a").as("Sink"))
         .where(f => f.source("Source").barrier("Barrier").sink("Sink").as("TaintFlow"), () => new TaintFlow())
-        .select(["Source", "Sink", "TaintFlow"])
+        .select("Source", "Sink", "TaintFlow")
 ];

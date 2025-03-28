@@ -1,35 +1,27 @@
-import { Queryable, Type, Value } from "qvog-engine";
+import { from, query, Queryable, select, Type, Value } from "qvog-engine";
 import { ArrayType, AssignStmt, BinaryOperator, Constant, IfStmt, InstanceOfExpr, InvokeExpr, P, Reference, ReturnStmt, UnionType, Variable } from "qvog-lib";
 
-export const AllValidNodes: Queryable = [
-    "Get All Valid Nodes", q => q
-        .from(f => f.withData(v => v.isSupported()).as("Node"))
-        .select("Node")
-];
+export const FindBinaryOperator = query("Find Binary Operator", () => {
+    from(f => f
+        .withData(v => v.stream().any(s => s instanceof BinaryOperator))
+        .as("Binary Operator"));
+    select("Binary Operator");
+});
 
-export const FindBinaryOperator: Queryable = [
-    "Find Binary Operator", q => q
-        .from(f => f
-            .withData(v => v.stream().any(s => s instanceof BinaryOperator))
-            .as("Binary Operator"))
-        .select("Binary Operator")
-];
-
-export const FindStringAssignment: Queryable = [
-    "Find String Assignment", q => q
-        .from(f => f
-            .withData(v => v.stream().any(s => {
-                if (s instanceof AssignStmt) {
-                    const value = s.getValue();
-                    if ((value instanceof Constant) && (value.getType().getName() === "string")) {
-                        return value.getValue() === "hello there";
-                    }
+export const FindStringAssignment = query("Find String Assignment", () => {
+    from(f => f
+        .withData(v => v.stream().any(s => {
+            if (s instanceof AssignStmt) {
+                const value = s.getValue();
+                if ((value instanceof Constant) && (value.getType().getName() === "string")) {
+                    return value.getValue() === "hello there";
                 }
-                return false;
-            }))
-            .as("String Assignment"))
-        .select(["String Assignment", "This is a string assignment"])
-];
+            }
+            return false;
+        }))
+        .as("String Assignment"));
+    select("String Assignment", "This is a string assignment");
+});
 
 export const FindInvoke: Queryable = [
     "Find Invoke", q => q
@@ -53,7 +45,7 @@ export const FindInvoke: Queryable = [
                 )
             ))
             .as("Invoke"))
-        .select(["Invoke", "Invoke found"])
+        .select("Invoke", "Invoke found")
 ];
 
 // An alternative way to write the above query.
@@ -78,7 +70,7 @@ export const FindInvokeAlt: Queryable = [
                     )
                 ).test(s)))
             .as("Invoke"))
-        .select(["Invoke", "Invoke found"])
+        .select("Invoke", "Invoke found")
 ];
 
 export const FindInstanceOf: Queryable = [
@@ -89,7 +81,7 @@ export const FindInstanceOf: Queryable = [
                 (s.getTestType().getName() === "TestObject")
             ))
             .as("Instance Of"))
-        .select(["Instance Of", "TestObject instanceof"])
+        .select("Instance Of", "TestObject instanceof")
 ];
 
 export const FindReturn: Queryable = [
@@ -97,7 +89,7 @@ export const FindReturn: Queryable = [
         .from(f => f
             .withData(v => v.stream().any(s => s instanceof ReturnStmt))
             .as("Return"))
-        .select(["Return", "Return statement found"])
+        .select("Return", "Return statement found")
 ];
 
 export const FindIf: Queryable = [
@@ -105,7 +97,7 @@ export const FindIf: Queryable = [
         .from(f => f
             .withData(v => v.stream().any(s => s instanceof IfStmt))
             .as("If"))
-        .select(["If", "If statement found"])
+        .select("If", "If statement found")
 ];
 
 export const FindUnion: Queryable = [
@@ -122,7 +114,7 @@ export const FindUnion: Queryable = [
                 .test(s)
             ))
             .as("Union"))
-        .select(["Union", "Union type found"])
+        .select("Union", "Union type found")
 ];
 
 export const FindReference: Queryable = [
@@ -130,5 +122,5 @@ export const FindReference: Queryable = [
         .from(f => f
             .withData(v => v.stream().any(s => s instanceof Reference))
             .as("Reference"))
-        .select(["Reference", "Reference found"])
+        .select("Reference", "Reference found")
 ];
