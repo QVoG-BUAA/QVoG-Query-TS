@@ -11,7 +11,8 @@ import {
     FindReturn,
     FindStringAssignment,
     FindUnion,
-    FindDataFlow
+    FindDataFlow,
+    FindSensitiveData
 } from './queries/demo.ark';
 
 Configuration.setSpecification(ArkTsSpecification);
@@ -29,7 +30,8 @@ engine.submit([
     FindReturn,
     FindStringAssignment,
     FindUnion,
-    FindDataFlow
+    FindDataFlow,
+    FindSensitiveData
 ]);
 
 engine.close();

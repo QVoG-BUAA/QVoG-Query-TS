@@ -55,6 +55,6 @@ export const ExistsTaintFlow: Queryable = [
         .from(f => f.withData(v => v.code === "a = bad").as("Source"))
         .from(f => f.withData(v => v.code === "f(a)").as("Barrier"))
         .from(f => f.withData(v => v.code === "result = a").as("Sink"))
-        .where(f => f.source("Source").barrier("Barrier").sink("Sink").as("TaintFlow"), () => new TaintFlow())
+        .exists(f => f.source("Source").barrier("Barrier").sink("Sink").as("TaintFlow"), () => new TaintFlow())
         .select("Source", "Sink", "TaintFlow")
 ];

@@ -1,5 +1,5 @@
-import { exists, FlowClause, from, query, Queryable, select, where } from "qvog-engine";
-import { ArrayType, AssignStmt, BinaryOperator, Constant, DataFlow, IfStmt, InstanceOfExpr, InvokeExpr, P, Reference, ReturnStmt, S, UnionType, Variable } from "qvog-lib";
+import { exists, from, query, Queryable, select } from "qvog-engine";
+import { ArrayType, AssignStmt, BinaryOperator, Constant, DataFlow, IfStmt, InstanceOfExpr, InvokeExpr, InvokeStmt, P, Reference, ReturnStmt, S, UnionType, Variable } from "qvog-lib";
 
 export const FindBinaryOperator = query("Find Binary Operator", () => {
     from(f => S.data(s => s instanceof BinaryOperator).as("Binary Operator"));
@@ -23,13 +23,13 @@ export const FindInvoke: Queryable = [
         .from(f => S.dataOf<InvokeExpr>(InvokeExpr, s =>
             // call to `foo` with a number argument
             (
-                (s.getTarget() == "foo") &&
-                (s.getArg(0).type.name === "number")
+                (s.target == "foo") &&
+                (s.args[0].type.name === "number")
             ) ||
             // baz.d
             (
-                (s.getTarget() === "d") && s.getBase() &&
-                (v => (v instanceof Variable) && (v.name === "baz"))(s.getBase())
+                (s.target === "d") && s.base &&
+                (v => (v instanceof Variable) && (v.name === "baz"))(s.base)
             ) ||
             // baz.e.f
             (
@@ -45,13 +45,13 @@ export const FindInvokeAlt: Queryable = [
     "Find Invoke Alt", q => q
         .from(f => S.dataOf<InvokeExpr>(InvokeExpr,
             P<InvokeExpr>(
-                t => ((t.getTarget() === "foo") && (t.getArg(0).type.name === "number"))
+                t => ((t.target === "foo") && (t.args[0].type.name === "number"))
             ).or<InvokeExpr>(
                 P<InvokeExpr>(
-                    t => (t.getTarget() === "d") && (t.getBase() instanceof Variable)
+                    t => (t.target === "d") && (t.base instanceof Variable)
                 ).and<Variable>(
                     t => t.name === "baz",
-                    t => t.getBase()! as Variable
+                    t => t.base! as Variable
                 )
             ).or<InvokeExpr>(
                 t => t.code.match(/baz\.e\.f/) !== null
@@ -104,3 +104,20 @@ export const FindDataFlow = query("Find Data Flow", () => {
 
     select("Flow", "Data flow found");
 });
+
+export const FindSensitiveData = query("Find Sensitive Data", () => {
+    from(f => S.dataOf<InvokeExpr>(InvokeExpr,
+        P<InvokeExpr>(s => s.target === "setItem")
+            .and(s => (s.base instanceof Variable) && (s.base.name === "localStorage"))
+            .and(s => s.argCount === 2)
+            .and(s => s.args[0] instanceof Constant)
+            .and<Constant>(
+                s => ["password"].includes(s.stringValue),
+                s => s.args[0] as Constant
+            )
+            .done()
+    ).as("Sensitive Data"));
+
+    select("Sensitive Data", "Sensitive data found");
+});
+
