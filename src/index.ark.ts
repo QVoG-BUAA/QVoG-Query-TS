@@ -3,15 +3,14 @@ import { Configuration, FilePrintStream, QVoGEngine } from 'qvog-engine';
 
 import {
     FindBinaryOperator,
-    FindIf,
-    FindInstanceOf,
     FindInvoke,
     FindInvokeAlt,
     FindReference,
-    FindReturn,
     FindStringAssignment,
     FindUnion,
+    FindDataFlowFluent,
     FindDataFlow,
+    FindDataFlowAlt,
     FindSensitiveData
 } from './queries/demo.ark';
 
@@ -22,15 +21,14 @@ let engine = QVoGEngine.getInstance()
 
 engine.submit([
     FindBinaryOperator,
-    FindIf,
-    FindInstanceOf,
     FindInvoke,
     FindInvokeAlt,
     FindReference,
-    FindReturn,
     FindStringAssignment,
     FindUnion,
+    FindDataFlowFluent,
     FindDataFlow,
+    FindDataFlowAlt,
     FindSensitiveData
 ]);
 

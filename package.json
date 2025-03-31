@@ -22,8 +22,8 @@
   "dependencies": {
     "buffer": "^6.0.3",
     "deasync": "^0.1.30",
-    "qvog-engine": "^0.2.0",
-    "qvog-lib": "^0.2.1"
+    "qvog-engine": "^0.2.1",
+    "qvog-lib": "^0.2.2"
   },
   "devDependencies": {
     "@types/deasync": "^0.1.5",

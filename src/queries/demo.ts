@@ -25,11 +25,11 @@ export const ExistsDataFlow: Queryable = [
     "Find Data Flow", q => q
         .from(f => f.withData(ValuePredicate.any()).as("Source"))
         .from(f => f.withPredicate(ValuePredicate.any()).as("Sink"))
-        .where(f => f.configure({
+        .exists(f => f.configure({
             flow: new HamiltonFlow(),
             strategy: new DfgTraverse()
         }).source("Source").sink("Sink").as("DataFlow"), () => new DataFlow())
-        .where(f => f.on("DataFlow").where(FlowPredicate.of(p => p.getSize() > 1)))
+        .where(f => f.on("DataFlow").where(FlowPredicate.of(p => p.size > 1)))
         .select("Source", "Sink", "DataFlow")
 ];
 
