@@ -117,12 +117,13 @@ export const FindDataFlowAlt = query("Find Data Flow Alt", () => {
 
 
 function checkLocalStorage(keywords: string[]): Predicate<InvokeExpr> {
-    return P<InvokeExpr>(s => s.target === "setItem" && s.base instanceof Variable)
-        .and<Variable>(s => s.name == "localStorage", v => v.base! as Variable)
-        .and(s => s.argCount === 2 && s.args[0] instanceof Constant)
+    return P<InvokeExpr>(s => s.target === "setItem")
+        .and<Variable>(s => s.name == "localStorage", v => v.base! as Variable, Variable)
+        .and(s => s.argCount === 2)
         .and<Constant>(
             s => keywords.includes(s.stringValue),
-            s => s.args[0] as Constant
+            s => s.args[0] as Constant,
+            Constant
         )
         .done();
 }
